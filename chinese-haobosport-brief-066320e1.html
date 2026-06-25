@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>好博体育 · 信息页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f7f7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: #1f1f1f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 780px;
+            width: 100%;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        /* 主视觉 */
+        .hero {
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-weight: 450;
+            font-size: 2.4rem;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            border-left: 3px solid #1f1f1f;
+            padding-left: 1rem;
+            color: #111;
+        }
+
+        .hero p {
+            margin-top: 1.2rem;
+            font-size: 1rem;
+            color: #4a4a4a;
+            max-width: 600px;
+        }
+
+        /* 信息卡片 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            margin-bottom: 3.2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 1.8rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 6px 20px rgba(0, 0, 0, 0.04);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h2 {
+            font-weight: 500;
+            font-size: 1.3rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            color: #222;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #1f1f1f;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #3b3b3b;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 0.25rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #8a8a8a;
+        }
+
+        /* 自然链接段落 */
+        .link-block {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2rem 2.2rem;
+            margin: 2.6rem 0 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 6px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .link-block h2 {
+            font-weight: 500;
+            font-size: 1.3rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.8rem;
+            color: #222;
+        }
+
+        .link-block p {
+            font-size: 0.95rem;
+            color: #3b3b3b;
+            max-width: 600px;
+        }
+
+        .link-block a {
+            color: #1f1f1f;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #c0c0c0;
+            font-weight: 500;
+            transition: text-decoration-color 0.2s;
+        }
+
+        .link-block a:hover {
+            text-decoration-color: #1f1f1f;
+        }
+
+        /* 提示块 */
+        .extra-note {
+            background: #f0f0f0;
+            border-radius: 18px;
+            padding: 1.5rem 2rem;
+            margin: 2.2rem 0 1.8rem;
+            font-size: 0.9rem;
+            color: #3b3b3b;
+        }
+
+        .extra-note strong {
+            font-weight: 500;
+            color: #1f1f1f;
+        }
+
+        .faq-mini {
+            margin-top: 2rem;
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 0;
+        }
+
+        .faq-mini details:first-of-type {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: #222;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::after {
+            content: "+";
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #7a7a7a;
+            margin-left: 0.5rem;
+        }
+
+        .faq-mini details[open] summary::after {
+            content: "–";
+        }
+
+        .faq-mini details p {
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+            color: #4f4f4f;
+            line-height: 1.6;
+            padding-right: 1rem;
+        }
+
+        .footer-note {
+            margin-top: 3.5rem;
+            border-top: 1px solid #dcdcdc;
+            padding-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #777;
+            text-align: left;
+        }
+
+        @media (max-width: 500px) {
+            .page {
+                padding: 2rem 1rem 4rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+                padding-left: 0.8rem;
+            }
+            .card {
+                padding: 1.4rem 1.4rem;
+            }
+            .link-block {
+                padding: 1.4rem 1.4rem 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 主视觉 -->
+        <div class="hero">
+            <h1>好博体育<br>一个稳定的信息入口</h1>
+            <p>页面本身不承载交互功能，只作为浏览时的说明与指引。无论你从何处来，这里都提供一条清晰的路径。</p>
+        </div>
+
+        <!-- 信息卡片区：用途 + 适合人群 -->
+        <div class="card-grid">
+            <div class="card">
+                <h2>用途卡片</h2>
+                <p>当你需要了解好博体育的站点结构、内容分区或常见疑问，这个页面可以作为稳定的起始参考。它不追踪用户，不加载外部资源，只提供最基本的信息框架。</p>
+                <ul>
+                    <li>快速了解好博体育所覆盖的主题方向</li>
+                    <li>获得指向主站的自然链接</li>
+                    <li>查看常见问题摘要（无需跳转）</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>适合人群</h2>
+                <p>这个介绍页更适合以下类型的访问者：</p>
+                <ul>
+                    <li>希望先浏览说明再决定是否深入的用户</li>
+                    <li>对好博体育仅有初步印象，想确认细节的读者</li>
+                    <li>偏好简洁界面、不愿被多余元素干扰的人</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 自然链接段落 -->
+        <div class="link-block">
+            <h2>从这里开始</h2>
+            <p>如果你希望直接访问主站，可以通过 <a href="https://chinese-haobosport.com">好博体育</a> 这一链接进入。页面保持独立，仅提供介绍性质的内容。主站的结构与信息以实际呈现为准，本页不保证实时同步更新，但会定期维护其准确性。</p>
+        </div>
+
+        <!-- 提示 + 小型 FAQ -->
+        <div class="extra-note">
+            <strong>提示：</strong> 本页为说明性页面，不含登录、注册或任何数据收集行为。所有链接均指向同一站点，无第三方跳转。
+        </div>
+
+        <div class="faq-mini">
+            <details>
+                <summary>好博体育主要提供什么内容？</summary>
+                <p>该站围绕体育资讯、赛事动态以及相关话题组织信息，页面风格偏向信息整合。具体栏目请以实际站点导航为准。</p>
+            </details>
+            <details>
+                <summary>这个介绍页与主站是什么关系？</summary>
+                <p>介绍页是一个独立的、轻量的前置页面，用于说明背景和提供入口。主站是完整的内容平台，介绍页不替代主站功能。</p>
+            </details>
+            <details>
+                <summary>页面是否会收集我的浏览信息？</summary>
+                <p>不会。本页为纯静态页面，不包含分析脚本、Cookie 或任何追踪代码。你的每一次访问都是匿名的。</p>
+            </details>
+        </div>
+
+        <div class="footer-note">
+            最后一次内容核校 · 近期<br>
+            页面仅作信息展示，无任何商业诱导。
+        </div>
+    </div>
+</body>
+</html>
